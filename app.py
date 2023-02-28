@@ -9,7 +9,7 @@ class User( object ):
         self.password = password
 
     def __str__( self ):
-        return "User(id='%s')" % self.id
+        return f"User(id='{self.id}')"
 
 
 user = User( 1, 'user', 'pass' )
@@ -37,8 +37,7 @@ def after_request( response ):
     response.headers.add( 'Access-Control-Allow-Origin', '*' )
     if request.method == 'OPTIONS':
         response.headers[ 'Access-Control-Allow-Methods' ] = 'DELETE, GET, POST, PUT'
-        headers = request.headers.get( 'Access-Control-Request-Headers' )
-        if headers:
+        if headers := request.headers.get('Access-Control-Request-Headers'):
             response.headers[ 'Access-Control-Allow-Headers' ] = headers
     return response
 
